@@ -1,25 +1,24 @@
 <template>
-  <div> test </div>
-  <!-- <Suspense>
+  <Suspense>
     <template #default>
       <HelloWorld msg="Welcome to Your Vue.js App" />
     </template>
     <template #fallback>
       <view>Loading...</view>
     </template>
-  </Suspense> -->
+  </Suspense>
 </template>
 
 <script>
-// import { Suspense } from 'vue'
-// import HelloWorld from './components/HelloWorld.vue'
-import './rxjs/demo'
+import { Suspense } from 'vue'
+import HelloWorld from './components/HelloWorld.vue'
+// import './rxjs/demo'
 
 export default {
   name: 'App',
   components: {
-    // Suspense,
-    // HelloWorld
+    Suspense,
+    HelloWorld
   }
 }
 </script>
