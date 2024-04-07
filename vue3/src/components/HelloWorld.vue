@@ -1,58 +1,86 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
-  </div>
+  <h1>{{ title }} {{ x }} = {{ y }} = {{ formatted }} </h1>
+
+  <button type="button" ref="button">
+    Choose file {{ props.msg }}
+  </button>
+
 </template>
 
-<script>
-export default {
-  name: 'HelloWorld',
-  props: {
-    msg: String
-  }
-}
-</script>
+<script setup>
+import { defineProps } from 'vue'
+const props = defineProps({
+  msg: String
+});
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h3 {
-  margin: 40px 0 0;
+import { useMouse, useDateFormat, useNow } from '@vueuse/core'
+const { x, y } = useMouse()
+
+const getTodoInfo = async () => {
+  return await new Promise((resolve) => {
+    setTimeout(resolve, 1000, 'hello suspense !')
+  })
 }
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
-</style>
+
+const formatted = useDateFormat(useNow(), 'YYYY-MM-DD HH:mm:ss')
+var title = await getTodoInfo()
+
+
+
+
+
+
+import { ref } from 'vue'
+
+import { Observable, Subject, of, interval } from 'rxjs'
+import { map, mapTo, takeUntil, withLatestFrom } from 'rxjs/operators'
+
+import { from, fromEvent, toObserver, useSubscription } from '@vueuse/rxjs'
+
+const button = ref(null)
+
+// 从一个静态值创建一个Observable
+const myObservable = of('hello', 'world');
+
+myObservable.subscribe(value => console.log(value));
+
+
+
+Observable.create(observer => {
+  observer.next('foo');
+  setTimeout(() => observer.next('bar'), 1000);
+})
+  .subscribe((text) => console.log(text), () => { }, () => { })
+
+
+const source = interval(100000000000000000).pipe(takeUntil(fromEvent(button, 'click')));
+
+const subject = new Subject();
+
+source.subscribe(subject);
+
+subject.subscribe((value) => console.log('A ' + value))
+
+setTimeout(() => {
+  subject.subscribe((value) => console.log('B ' + value))
+}, 1000)
+
+
+
+const count = ref(0)
+
+
+useSubscription(
+  interval(1000)
+    .pipe(
+      mapTo(1),
+      takeUntil(fromEvent(button, 'click')),
+      withLatestFrom(from(count, {
+        immediate: true,
+        deep: false,
+      })),
+      map(([curr, total]) => { /* console.log(curr, total);*/ return curr + total; }),
+    )
+    .subscribe(toObserver(count)));
+
+</script>

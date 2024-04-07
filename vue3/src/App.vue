@@ -1,15 +1,25 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div> test </div>
+  <!-- <Suspense>
+    <template #default>
+      <HelloWorld msg="Welcome to Your Vue.js App" />
+    </template>
+    <template #fallback>
+      <view>Loading...</view>
+    </template>
+  </Suspense> -->
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+// import { Suspense } from 'vue'
+// import HelloWorld from './components/HelloWorld.vue'
+import './rxjs/demo'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    // Suspense,
+    // HelloWorld
   }
 }
 </script>
