@@ -1,12 +1,13 @@
 <template>
-    <SuspenseA>
+    <Suspense>
         <template #default>
             <HelloWorld msg="Welcome to Your Vue.js App" />
         </template>
         <template #fallback>
             <view>Loading...</view>
         </template>
-    </SuspenseA>
+    </Suspense>
+
     <HocComponent>
         <template #default="{ count, increment }">
             count === {{ count }}
@@ -23,28 +24,14 @@
     <Aslot />
 
     <ParentSlot />
-
 </template>
 <script setup>
-import { Suspense } from 'vue';
 import HelloWorld from '../components/HelloWorld.vue';
 import CounterView from '../components/CounterView.vue';
 import { withCounter } from '../hoc/withCounter'
 import HocComponentState from '../hoc/withState'
 import Aslot from '../components/hslot/Parent'
 import ParentSlot from '../components/hslot/ParentSlot'
-
 // import '../rxjs/demo'
-
 const HocComponent = withCounter(CounterView);
-const SuspenseA = Suspense;
-// export default {
-//   name: 'App',
-//   components: {
-//     Suspense,
-//     HelloWorld,
-//     HocComponent: withCounter(CounterView),
-//     HocComponentState
-//   }
-// }
 </script>
