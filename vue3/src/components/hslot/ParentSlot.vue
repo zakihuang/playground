@@ -15,9 +15,17 @@
       {{ data }}
     </template>
   </C>
+  <DeFe>
+    <template #default="data">
+      <div @click="data.add">
+        {{ data }}
+      </div>
+    </template>
+  </DeFe>
 </template>
 <script setup>
 import A from "./A";
 import B from "./B";
 import C from "./C";
+import DeFe from "./DeFe";
 </script>
