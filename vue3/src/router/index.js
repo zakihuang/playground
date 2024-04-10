@@ -1,28 +1,31 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import Home from "../views/HomeView";
 import About from "../views/AboutView";
+import Vue3Ref from "../views/Vue3Ref";
 
-const routes = [
+export const routes = [
   {
     path: "/home",
-    name: 'Home',
+    name: "Home",
     component: Home
   },
   {
-    path:'/about',
-    component:About
+    path: "/about",
+    name: "About",
+    component: About
   },
-  // {
-  //   path:'/list',
-  //   component:List
-  // },
+  {
+    path: "/vue3fef",
+    name: "Vue3Ref",
+    component: Vue3Ref
+  },
   // {
   //   path:'/detail',
   //   component:Detail
   // },
   {
     path: "/",
-    redirect: "/home"
+    redirect: "/vue3fef"
   }
 ];
 
