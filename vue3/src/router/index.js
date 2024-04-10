@@ -2,6 +2,7 @@ import { createRouter, createWebHashHistory } from "vue-router";
 import Home from "../views/HomeView";
 import About from "../views/AboutView";
 import Vue3Ref from "../views/Vue3Ref";
+import Vue3Hooks from "../views/Vue3Hooks";
 
 export const routes = [
   {
@@ -18,6 +19,11 @@ export const routes = [
     path: "/vue3fef",
     name: "Vue3Ref",
     component: Vue3Ref
+  },
+  {
+    path: "/Vue3Hooks",
+    name: "Vue3Hooks",
+    component: Vue3Hooks
   },
   // {
   //   path:'/detail',
