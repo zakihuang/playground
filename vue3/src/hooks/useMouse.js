@@ -17,6 +17,9 @@ export function useMouse() {
   onMounted(() => window.addEventListener("mousemove", update));
   onUnmounted(() => window.removeEventListener("mousemove", update));
 
+  function setValue(v) {
+    x.value = v;
+  }
   // 通过返回值暴露所管理的状态
-  return { x, y };
+  return { x, y, setValue };
 }

@@ -13,7 +13,8 @@
 <script setup>
 // 副作用
 import { useMouse } from '../hooks/useMouse'
-const { x, y } = new useMouse();
+
+const { x, y } = useMouse();
 
 // 轻量化
 import { useLoading } from '../hooks/useLoading'

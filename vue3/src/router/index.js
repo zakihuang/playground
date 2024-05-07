@@ -3,6 +3,7 @@ import Home from "../views/HomeView";
 import About from "../views/AboutView";
 import Vue3Ref from "../views/Vue3Ref";
 import Vue3Hooks from "../views/Vue3Hooks";
+import Vue3Setup from "../views/Vue3Setup";
 
 export const routes = [
   {
@@ -25,10 +26,11 @@ export const routes = [
     name: "Vue3Hooks",
     component: Vue3Hooks
   },
-  // {
-  //   path:'/detail',
-  //   component:Detail
-  // },
+  {
+    path: "/Vue3Setup",
+    name: "Vue3Setup",
+    component: Vue3Setup
+  },
   {
     path: "/",
     redirect: "/vue3fef"
