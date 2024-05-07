@@ -1,9 +1,8 @@
 import { useEffect, useRef } from "react";
 
-// import G6 from "@antv/g6/dist/g6.min.js";
+import G6 from "@antv/g6/dist/g6.min.js";
 
-import G6 from "@antv/g6";
-import "@antv/layout/dist/layout.min.js";
+// import G6 from "@antv/g6";
 
 
 import insertCss from "insert-css";
@@ -308,7 +307,7 @@ function initF(ref) {
 
       //   return 100
       // },
-      controlPoints: false,
+      controlPoints: true,
       // sortByCombo: true,
       nodeOrder: [],
      workerEnabled: false,
